@@ -222,7 +222,7 @@ ______
 
 Escolha a opção que responde corretamente:
 
-A) Simular física avançada, incluindo corpos rígidos, colisões complexas e interação entre objetos com gravidade e forças.
+**A) Simular física avançada, incluindo corpos rígidos, colisões complexas e interação entre objetos com gravidade e forças.** ✅
 
 B) Gerenciar eventos de entrada do usuário, como cliques e toques na tela, permitindo movimentação de personagens.
 
@@ -244,6 +244,35 @@ Pedidos entre R$50,00 e R$199,99 (inclusive) → "Frete com custo adicional!"
 
 Pedidos de R$200,00 ou mais → "Frete grátis!"
 ```
+```javascript 
+function clasfrete(valorCompra){
+    let frete;
+
+    if( valorCompra < 50){
+        frete=  'Frete nao disponivel';
+    }
+    else if (50< valorCompra< 199){
+        frete=  'Frete com custo adicional';
+    }
+    else{
+        frete= 'Frete grátis';
+    }
+   
+   
+        return(`O valor total da sua compra deu ${valorCompra.toFixed(2)}\n e o Frete e de: ${frete}`)
+
+    
+
+}
+
+let compra1 = clasfrete(30);
+let compra2 = clasfrete(80);
+let compra3 = clasfrete(300);
+
+console.log(compra1);
+console.log(compra2);
+console.log(compra3);
+```
 Implemente um pseudocódigo que receba o valor total da compra e exiba a classificação correta do frete para o cliente.
 ______
 
@@ -260,6 +289,56 @@ Método Construtor(modelo, ano):
 Define os valores dos atributos modelo e ano com os valores passados como parâmetro.
 Método CalcularConsumo():
 ```
+```javascript
+class Veiculo {
+    constructor(modelo, ano) {
+        this.modelo = modelo;
+        this.ano = ano;
+    }
+
+  
+    calcularConsumo() {
+        console.log("Método genérico de cálculo de consumo - deve ser sobrescrito.");
+    }
+}
+
+
+class Carro extends Veiculo {
+    constructor(modelo, ano, eficiencia) {
+        super(modelo, ano); 
+        this.eficiencia = eficiencia; 
+    }
+
+    
+    calcularConsumo(distancia) {
+        const consumo = distancia / this.eficiencia;
+        return `O carro ${this.modelo} consumiu ${consumo.toFixed(2)} para ${distancia} km`;
+    }
+}
+
+
+class Moto extends Veiculo {
+    constructor(modelo, ano, eficiencia) {
+        super(modelo, ano); 
+        this.eficiencia = eficiencia; 
+    }
+
+    calcularConsumo(distancia) {
+        const consumo = distancia / this.eficiencia;
+        return `A moto ${this.modelo} consumiu ${consumo.toFixed(2)} para ${distancia} km.`;
+    }
+}
+
+
+const carro = new Carro("Sedan", 2022, 12);
+const moto = new Moto("Esportiva", 2023, 20);
+
+console.log(carro.calcularConsumo(240));
+console.log(moto.calcularConsumo(240));```
+
+
+
+```
 Implementação genérica para cálculo de consumo, a ser sobrescrita pelas subclasses.
 Agora, implemente as classes Carro e Moto, garantindo que ambas herdem de Veiculo e possuam métodos específicos para calcular o consumo de combustível com base na quilometragem e eficiência do veículo.
 ______
@@ -273,6 +352,40 @@ Implemente a lógica dessa simulação em pseudocódigo, considerando a seguinte
 Considere a fórumla de atualização velocidade:
 ```
     velocidade = velocidadeInicial - desaceleracao * tempo
+```
+```javascript 
+function simularPouso(velocidadeInicial, desaceleracao, tempoMaximo, velocidadeSegura) {
+    let tempo = 0;
+    let velocidadeAtual = velocidadeInicial;
+
+   
+    while (velocidadeAtual > velocidadeSegura && tempo < tempoMaximo) {
+        velocidadeAtual = velocidadeInicial - desaceleracao * tempo;
+        console.log(`Tempo: ${tempo}s - Velocidade: ${velocidadeAtual.toFixed(2)} m/s`);
+        
+       
+        if (velocidadeAtual <= velocidadeSegura) {
+            console.log("\nPouso seguro realizado com sucesso!");
+            return;
+        }
+
+       
+        tempo++;
+    }
+
+  
+    if (velocidadeAtual > velocidadeSegura) {
+        console.log("\nFalha no pouso! Tempo máximo excedido sem atingir a velocidade segura.");
+    }
+}
+
+const velocidadeInicial = 5000;
+const desaceleracao = 100;      
+const tempoMaximo = 60;            
+const velocidadeSegura = 0;       
+
+simularPouso(velocidadeInicial, desaceleracao, tempoMaximo, velocidadeSegura);
+
 ```
 Seu programa deve determinar quanto tempo será necessário para que a sonda atinja uma velocidade segura de pouso, sem ultrapassar os limites estabelecidos.
 ______
